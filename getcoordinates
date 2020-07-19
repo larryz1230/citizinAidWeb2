@@ -1,0 +1,51 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD']=='POST') {
+
+
+    require_once 'connect.php';
+
+    $sql = "SELECT coordinate FROM citizen_aid_table";
+
+    $response = mysqli_query($conn, $sql);
+
+
+
+    $storeArray = Array();
+
+    while ($row = mysql_fetch_array($response, MYSQL_ASSOC)) {
+        $storeArray[] =  $row['coordinate'];  
+        echo "$row['coordinate']";
+    }       
+    
+        
+     $row = mysqli_fetch_assoc($response);
+
+
+            
+        array_push($storeArray);
+
+
+    if (mysqli_query($conn, $sql)) {
+
+        $result["success"] = "1";
+        $result ["message"] = "success";
+
+        echo json_encode($result);
+        mysqli_close($conn);
+
+    } else {
+
+        $result["success"] = "0";
+        $result ["message"] = "error";
+
+        echo json_encode($result);
+        mysqli_close($conn);
+    }
+
+    echo $email;
+}
+
+
+
+?>
